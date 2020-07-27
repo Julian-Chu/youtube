@@ -19,7 +19,7 @@ func TestDownloadFromYT_AssignOutputFileName(t *testing.T) {
 	// url from issue #25
 	testVideoUrl := "https://www.youtube.com/watch?v=54e6lBE3BoQ"
 	if err := y.DecodeURL(testVideoUrl); err != nil {
-		t.Error("Cannot decode download url")
+		t.Errorf("Cannot decode download url: %s", err)
 		return
 	}
 	curDir, _ := os.Getwd()
@@ -47,7 +47,7 @@ func TestDownloadFromYT_AssignOutputFileName(t *testing.T) {
 		fmt.Println("download to " + outputDir + "\\" + tc.outputFile)
 		t.Run(tc.name, func(t *testing.T) {
 			if err := y.StartDownload(outputDir, tc.outputFile, tc.quality, tc.itagNo); err != nil {
-				t.Error("Failed in downloading")
+				t.Errorf("Failed in downloading: %s", err)
 			}
 		})
 	}
@@ -63,14 +63,14 @@ func TestDownloadFromYT_NoOutputFileName(t *testing.T) {
 	// url from issue #21
 	testVideoUrl := "https://www.youtube.com/watch?v=n3kPvBCYT3E"
 	if err := y.DecodeURL(testVideoUrl); err != nil {
-		t.Error("Cannot decode download url")
+		t.Errorf("Cannot decode download url:%s", err)
 		return
 	}
 	curDir, _ := os.Getwd()
 	outputDir := filepath.Join(curDir, downloadToDir)
 	fmt.Println("download to " + outputDir + "\\" + "Silhouette Eurobeat Remix")
 	if err := y.StartDownload(outputDir, "", "", 0); err != nil {
-		t.Error("Failed in downloading")
+		t.Errorf("Failed in downloading: %s", err)
 		return
 	}
 }
@@ -85,14 +85,14 @@ func TestDownloadFromYT_HighQuality(t *testing.T) {
 	// url from issue #21
 	testVideoId := "n3kPvBCYT3E"
 	if err := y.DecodeURL(testVideoId); err != nil {
-		t.Error("Cannot decode download url")
+		t.Errorf("Cannot decode download url: %s", err)
 		return
 	}
 	curDir, _ := os.Getwd()
 	outputDir := filepath.Join(curDir, downloadToDir)
 	fmt.Println("download to " + outputDir + "\\" + "Silhouette Eurobeat Remix")
 	if err := y.StartDownloadWithHighQuality(outputDir, "", "hd1080"); err != nil {
-		t.Error("Failed in downloading")
+		t.Errorf("Failed in downloading: %s", err)
 		return
 	}
 }
@@ -107,7 +107,7 @@ func TestDownloadFromYT_WithItag(t *testing.T) {
 	// url from issue #25
 	testVideoUrl := "https://www.youtube.com/watch?v=54e6lBE3BoQ"
 	if err := y.DecodeURL(testVideoUrl); err != nil {
-		t.Error("Cannot decode download url")
+		t.Errorf("Cannot decode download url: %s", err)
 		return
 	}
 

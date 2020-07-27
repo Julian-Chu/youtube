@@ -148,7 +148,7 @@ func (d Decipher) parseDecipherOpsAndArgs(videoId string) (operations []string, 
 		return nil, nil, errors.New("decipher: function names not found")
 	}
 	funcName := arr[1]
-	decipherFuncBodyPattern := regexp.MustCompile(fmt.Sprintf(`[^h\.]%s=function\(\w+\)\{(.*?)\}`, funcName))
+	decipherFuncBodyPattern := regexp.MustCompile(fmt.Sprintf(`\$%s=function\(\w+\)\{(.*?)\}`, funcName))
 
 	// eg: get a=a.split("");Et.vw(a,2);Et.Zm(a,4);Et.Zm(a,46);Et.vw(a,2);Et.Zm(a,34);Et.Zm(a,59);Et.cn(a,42);return a.join("")
 	arr = decipherFuncBodyPattern.FindStringSubmatch(basejs)
